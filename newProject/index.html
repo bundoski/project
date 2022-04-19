@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tachyons@4.9.1/css/tachyons.min.css"
+    />
+  </head>
+
+  <body>
+
+
+    <div class="container">
+        <h1><b>How We Built a $10 Million Coaching Company with ONE Automated Webinar...</b></h1>
+
+    </div>
+
+    <style>
+        .container{
+            text-align: center;
+            padding-top:45px;
+            
+        }
+    </style>
+
+    <div class="center">
+      <h3>You don't want to miss this!</h3>
+      <form method="post">
+        <div class="txt_field">
+          <input type="text" required />
+          <span></span>
+          <label>Enter your full name</label>
+        </div>
+
+        <div class="txt_field">
+          <input type="text" required />
+          <span></span>
+          <label>Enter your email</label>
+        </div>
+        <input type="submit" value="Register" />
+      </form>
+
+      <div class="col mt4 tc fw1 f2 white" id="clockdiv">
+        <div class="pa2 br3 dib">
+          <span class="pa3 br3 bg-dark-blue dib minutes"></span>
+          <div class="pt1 f5 fw1">Minutes</div>
+        </div>
+        <div class="pa2 br3 dib">
+          <span class="pa3 br3 bg-dark-blue dib seconds"></span>
+          <div class="pt1 f5 fw1">Seconds</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function getTimeRemaining(endtime) {
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        var seconds = Math.floor((t / 1000) % 60);
+        var minutes = 10;
+
+        return {
+          total: t,
+          minutes: minutes,
+          seconds: seconds,
+        };
+      }
+
+      function initializeClock(id, endtime) {
+        var clock = document.getElementById(id);
+
+
+        var minutesSpan = clock.querySelector(".minutes");
+        var secondsSpan = clock.querySelector(".seconds");
+
+        function updateClock() {
+          var t = getTimeRemaining(endtime);
+          minutesSpan.innerHTML = ("0" + t.minutes).slice(-2);
+          secondsSpan.innerHTML = ("0" + t.seconds).slice(-2);
+
+          if (t.total <= 0) {
+            clearInterval(timeinterval);
+          }
+        }
+
+        updateClock();
+        var timeinterval = setInterval(updateClock, 1000);
+      }
+
+      // example 15 days out
+      var deadline = new Date(
+        Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000
+      );
+      // example 1 day out = new Date(Date.parse(new Date()) + 1 * 24 * 60 * 60 * 1000);
+
+      if (new Date() > deadline) {
+        alert("COUNTDOWN COMPLETE! \n Some Call to Action!!!");
+      }
+
+      initializeClock("clockdiv", deadline);
+    </script>
+  </body>
+</html>
